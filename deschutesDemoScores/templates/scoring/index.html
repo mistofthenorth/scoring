@@ -1,0 +1,89 @@
+{% load static %}
+
+<!doctype html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static "scoring/style.css" %}" rel="stylesheet" type="text/css" media="screen" />
+
+    <title>Deschutes Demo Scoring</title>
+  </head>
+<html lang="en">
+
+<div class="jumbotron">
+  <div align="center">
+  <img src="{% static "scoring/dd-header.gif" %}" width="1600" height="200"/>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    <form action="" method="post">
+    	  {% csrf_token %}
+        {% for workout in workouts %}
+        <input type="radio" name="workout" id="choice" value="{{workout.id}}"  {% if workout.id == currentWorkout %} checked = "" {% endif %}>
+        <label for="choice">{{workout.description}}</label><br>
+         {% endfor %}
+                  <select id = "division" name="division">
+                         {% for division in divisions %}
+                   <option value = {{division.id}} {% if division.id == currentDivision %} selected {% endif %}>{{division.description}}</option>
+                         {% endfor %}
+                  </select>
+                  <br>
+        <input type="submit" value="Choose Workout">
+    </form>
+      <form method="post" action="scoreInput" class="inline">
+       {% csrf_token %}
+        <input type="hidden" name="division" value="{{currentDivision}}">
+        <input type="hidden" name="workout" value="{{currentWorkout}}">
+
+        <input type="submit" name="submit_param" value="Edit Scores" class="link-button">
+          
+        </input>
+      </form>
+
+      <form method="post" action="finalResults" class="inline">
+         {% csrf_token %}
+        <input type="hidden" name="division" value="{{currentDivision}}">
+        <input type="hidden" name="workout" value="{{currentWorkout}}">
+        <input type="submit" name="submit_param" value="Final Results" class="link-button">
+          
+        </input>
+      </form>
+    </div>
+    <div class=col>
+      {{workoutDescription|safe}}
+    </div>
+  </div>
+</div>
+
+<table class="table">
+<th>Rank</th>
+{% if scoringStyle != 'W' %} <th>reps</th> {% endif %}
+{% if scoringStyle == 'T' %} <th>minutes</th> {% endif %}
+{% if scoringStyle == 'T' %} <th>seconds</th> {% endif %}
+{% if scoringStyle == 'W' %} <th>weight</th> {% endif %}
+
+<th>workout</th>
+<th>division</th>
+<th>team</th>
+
+{% for score in scores %}
+<tr>
+<td>
+{{score.rank}}</td><td>
+{% if scoringStyle != 'W' %} {{score.score.reps}}</td><td> {% endif %}
+{% if scoringStyle == 'T' %}  {{score.score.minutes}}</td><td> {% endif %}
+{% if scoringStyle == 'T' %} {{score.score.seconds}}</td><td> {% endif %}
+{% if scoringStyle == 'W' %} {{score.score.weight}}</td><td> {% endif %}
+{{score.score.workout.description}}</td><td>
+{{score.score.team.division}}</td><td>
+{{score.score.team_id}}</td>
+</tr>
+{% endfor %}
+</table>
+</html>

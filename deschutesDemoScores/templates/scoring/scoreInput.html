@@ -1,0 +1,77 @@
+{% load static %}
+
+<!doctype html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static "scoring/style.css" %}" rel="stylesheet" type="text/css" media="screen" />
+
+    <title>Deschutes Demo Score Input</title>
+  </head>
+<html lang="en">
+
+<div class="jumbotron">
+  <div align="center">
+  <img src="{% static "scoring/dd-header.gif" %}" width="1600" height="200"/>
+  </div>
+</div>
+<form action="scoreInputReceived" method="post">
+{% csrf_token %}
+<div class="form-row">
+    <div class="col-1">
+    <h4>Team</h4>   
+    </div>
+    <div class="col">
+    <h4>Minutes</h4>
+    </div>
+    <div class="col">
+    <h4>Seconds</h4>
+    </div>
+    <div class="col">
+    <h4>Reps</h4>
+    </div>
+    <div class="col">
+    <h4>Weight</h4>
+    </div>
+</div>
+
+<hr>
+
+{% for score in scores %}
+
+  <div class="form-row">
+    
+   
+    <div class="col-1">
+      <input type="text" id="disabledInput" name="team" class="form-control" value="{{score.score.team_id}}">
+    </div>
+
+    <div class="col">
+ 
+      <input type="text" name="minutes" class="form-control" value="{{score.score.minutes}}">
+    </div>
+    <div class="col">
+
+      <input type="text" name="seconds" class="form-control" value="{{score.score.seconds}}">
+    </div>
+    <div class="col">
+
+      <input type="text" name="reps" class="form-control" value="{{score.score.reps}}">
+    </div>
+    <div class="col">
+
+      <input type="text" name="weight" class="form-control" value="{{score.score.weight}}">
+    </div>
+  </div>
+<hr>
+{% endfor %}
+
+
+
+  <button class="btn btn-primary" type="submit">Submit form</button>
+
+</form>
