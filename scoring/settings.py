@@ -25,7 +25,7 @@ SECRET_KEY = 'x78bsbag@3qy1^^ci6f!__dwoo$@(l!*11=h*ch2$is8ms7+2k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.16','127.0.0.1','brians-macbook-pro.local','raspberrypi']
+ALLOWED_HOSTS = ['192.168.0.16','127.0.0.1','brians-macbook-pro.local','raspberrypi','django-scoring.nysp5ab6tw.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -75,23 +75,23 @@ WSGI_APPLICATION = 'scoring.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': ('scores_db'),
-        'USER': ('scoresadmin'),
-        'PASSWORD': ('scoresadmin'),
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': ('scores_db'),
+#        'USER': ('scoresadmin'),
+#        'PASSWORD': ('scoresadmin'),
+#        'HOST': '',
+#        'PORT': '',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -130,3 +130,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'

@@ -22,8 +22,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-    <form action="" method="post">
-    	  {% csrf_token %}
+    <form action="" method="get">
+    	  
         {% for workout in workouts %}
         <input type="radio" name="workout" id="choice" value="{{workout.id}}"  {% if workout.id == currentWorkout %} checked = "" {% endif %}>
         <label for="choice">{{workout.description}}</label><br>
@@ -46,8 +46,7 @@
         </input>
       </form>
 
-      <form method="post" action="finalResults" class="inline">
-         {% csrf_token %}
+      <form method="get" action="finalResults" class="inline">
         <input type="hidden" name="division" value="{{currentDivision}}">
         <input type="hidden" name="workout" value="{{currentWorkout}}">
         <input type="submit" name="submit_param" value="Final Results" class="link-button">

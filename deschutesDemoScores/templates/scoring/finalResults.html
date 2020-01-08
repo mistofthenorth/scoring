@@ -22,8 +22,7 @@
 
 
 <div align='center'>
-<form action="" method="post">
-	  {% csrf_token %}
+<form action="" method="get">
               <select id = "division" name="division">
                      {% for division in divisions %}
                <option value = {{division.id}}>{{division.description}}</option>

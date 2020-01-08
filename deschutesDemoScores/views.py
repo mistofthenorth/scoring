@@ -9,10 +9,10 @@ from .importing import DDDataImport
 
 def index(request):
     try:
-        workout = request.POST['workout']
-        division = request.POST['division']
+        workout = request.GET['workout']
+        division = request.GET['division']
     except:
-        workout = 1
+        workout = 6
         division = 1
     template = loader.get_template('scoring/index.html')
     # DDDataImport.importDDTeams()
@@ -31,7 +31,7 @@ def index(request):
 
 def finalResults(request):
     try:
-        division = request.POST['division']
+        division = request.GET['division']
     except:
         division = 1
 
@@ -52,7 +52,7 @@ def scoreInput(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 1
+        workout = 6
         division = 1
 
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
@@ -68,7 +68,7 @@ def scoreInputReceived(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 1
+        workout = 6
         division = 1
     # Split into lists
     listOfTeams = request.POST.getlist('team')
