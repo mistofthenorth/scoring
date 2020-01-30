@@ -3,8 +3,3 @@ table { border :1px; }
 table tr td span {
   color: rgba(0, 0, 0, 0.3);
 }
-
-body {
-
-	color: rgba(0, 0, 0, 0.3);
-}
