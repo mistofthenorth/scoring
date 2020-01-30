@@ -12,15 +12,15 @@ def index(request):
         workout = request.GET['workout']
         division = request.GET['division']
     except:
-        workout = 6
+        workout = 1
         division = 1
     template = loader.get_template('scoring/index.html')
     # DDDataImport.importDDTeams()
     # DDDataImport.importDDData()
     print(workout)
     print(division)
-    listOfWorkouts = Workout.objects.filter(event=1)
-    listOfDivisions = Division.objects.filter(event=1)
+    listOfWorkouts = Workout.objects.filter(event=2)
+    listOfDivisions = Division.objects.filter(event=2)
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
     scoringStyle = Workout.objects.get(pk=workout)
     workoutDescription = scoringStyle.description_extended
@@ -37,8 +37,8 @@ def finalResults(request):
 
     currentDivision = Division.objects.get(pk=division)
     currentDivisionDescription = currentDivision.description
-    listOfDivisions = Division.objects.filter(event=1)
-    listOfWorkouts = Workout.objects.filter(event=1)
+    listOfDivisions = Division.objects.filter(event=2)
+    listOfWorkouts = Workout.objects.filter(event=2)
     allWorkouts = totals.getAllWorkoutsTotal(division)
     template = loader.get_template('scoring/finalResults.html')
     context = {'divisions': listOfDivisions, 'allWorkouts': allWorkouts,
@@ -52,13 +52,17 @@ def scoreInput(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 6
+        workout = 1
         division = 1
 
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
     sortedListOfScores = sorted(listOfScores, key=lambda x: (x.score.team_id))
+    currentDivision = Division.objects.get(pk=division)
+    currentDivisionDescription = currentDivision.description
+    currentWorkout = Workout.objects.get(pk=workout)
+    currentWorkoutDescription = currentWorkout.description
     template = loader.get_template('scoring/scoreInput.html')
-    context = {'scores': sortedListOfScores}
+    context = {'scores': sortedListOfScores,'currentDivisionDescription': currentDivisionDescription, 'currentWorkoutDescription': currentWorkoutDescription, 'currentWorkout': int(workout), 'currentDivision' : int(division)}
     return HttpResponse(template.render(context, request))
 
 
@@ -68,9 +72,11 @@ def scoreInputReceived(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 6
+        workout = 1
         division = 1
     # Split into lists
+    print(workout)
+    print(division)
     listOfTeams = request.POST.getlist('team')
     listOfMinutes = request.POST.getlist('minutes')
     listOfSeconds = request.POST.getlist('seconds')
@@ -80,7 +86,7 @@ def scoreInputReceived(request):
 
     for (i, teamScore) in enumerate(listOfTeams):
         score = Score.objects.get(
-            team=listOfTeams[i], workout=workout, event=1)
+            team=listOfTeams[i], workout=workout, event=2)
         try:
             score.weight = int(listOfWeight[i])
         except ValueError:

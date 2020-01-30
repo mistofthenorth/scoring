@@ -37,7 +37,7 @@ def importDDTeams():
                 team=row[0],
                 description=row[1],
                 division=Division.objects.get(pk=row[2]),
-                event=Event.objects.get(pk=1)
+                event=Event.objects.get(pk=2)
             )
             print(row)
             # creates a tuple of the new object or

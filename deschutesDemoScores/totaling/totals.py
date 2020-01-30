@@ -24,7 +24,7 @@ def getSingleWorkoutTotal(workout, division):
 
     for team in missingTeamsList:
         (blankScore, created) = Score.objects.get_or_create(weight=None, minutes=None, seconds=None, reps=None,
-                                                            team=Team.objects.get(pk=team), workout=Workout.objects.get(pk=workout), event=Event.objects.get(pk=1))
+                                                            team=Team.objects.get(pk=team), workout=Workout.objects.get(pk=workout), event=Event.objects.get(pk=2))
         setOfScores.append(blankScore)
 
     listOfScores = []
@@ -57,7 +57,7 @@ def getSingleWorkoutTotal(workout, division):
 
 def getAllWorkoutsTotal(division):
 
-    setOfWorkouts = Workout.objects.filter(event=1)
+    setOfWorkouts = Workout.objects.filter(event=2)
 
     listOfWorkoutScores = []
     for workout in setOfWorkouts:

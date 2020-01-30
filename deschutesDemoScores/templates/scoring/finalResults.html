@@ -16,7 +16,7 @@
 
 <div class="jumbotron">
   <div align="center">
-  <img src="{% static "scoring/dd-header.gif" %}" width="1600" height="200"/>
+  <img src="{% static "scoring/cc-header.jpeg" %}" width="1600" height="200"/>
   </div>
 </div>
 
@@ -31,11 +31,12 @@
     <input type="submit" value="Choose Division">
 </form>
 </div>
+<h1>
 <p align='center'>
-{{currentDivision}}
+  {{currentDivision}}
 </p>
-
-<table class="table">
+</h1>
+<table class="table table-striped">
 <th>Team</th>
 {% for workout in workouts %}
 <th>{{workout.description}}</th>
@@ -48,7 +49,8 @@
 {{score.team}}</td><td>
 
   {% for event in score.eventScores %}
-  {{event.rank}} </td><td>
+  {{event.rank}} <span>({% if event.score.workout.scoringStyle == 'R' %}{{event.score.reps}}{% endif %}{% if event.score.workout.scoringStyle == 'T' %}{{event.score.minutes}}:{% endif %}{% if event.score.workout.scoringStyle == 'T' %}{{event.score.seconds}}{% endif %}{% if event.score.workout.scoringStyle == 'W' %}{{event.score.weight}}{% endif %})</span>
+  </td><td>
   {% endfor %}
 
 {{score.score}}</td><td>

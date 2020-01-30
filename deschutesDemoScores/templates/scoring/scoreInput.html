@@ -16,15 +16,20 @@
 
 <div class="jumbotron">
   <div align="center">
-  <img src="{% static "scoring/dd-header.gif" %}" width="1600" height="200"/>
+  <img src="{% static "scoring/cc-header.jpeg" %}" width="1600" height="200"/>
   </div>
 </div>
+<h1>
+{{currentWorkoutDescription}} -- <br>
+Division {{currentDivisionDescription}}
+</h1>
 <form action="scoreInputReceived" method="post">
 {% csrf_token %}
 <div class="form-row">
     <div class="col-1">
     <h4>Team</h4>   
     </div>
+    <div class='col'></div>
     <div class="col">
     <h4>Minutes</h4>
     </div>
@@ -49,7 +54,10 @@
     <div class="col-1">
       <input type="text" id="disabledInput" name="team" class="form-control" value="{{score.score.team_id}}">
     </div>
-
+    <div class="col">
+ 
+      <input type="text" name="description" class="form-control" value="{{score.score.team.description}}">
+    </div>
     <div class="col">
  
       <input type="text" name="minutes" class="form-control" value="{{score.score.minutes}}">
@@ -71,7 +79,8 @@
 {% endfor %}
 
 
-
+        <input type="hidden" name="division" value="{{currentDivision}}">
+        <input type="hidden" name="workout" value="{{currentWorkout}}">
   <button class="btn btn-primary" type="submit">Submit form</button>
 
 </form>
