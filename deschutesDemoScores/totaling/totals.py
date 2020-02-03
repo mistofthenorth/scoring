@@ -101,7 +101,7 @@ class rankedScore:
 
 class finalResult:
     def __init__(self, team, eventScores):
-        self.team = team
+        self.team = Team.objects.get(pk=team)
         self.rank = 0
         self.eventScores = eventScores
         self.score = sum(x.rank for x in eventScores)

@@ -23,9 +23,14 @@ def index(request):
     listOfDivisions = Division.objects.filter(event=2)
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
     scoringStyle = Workout.objects.get(pk=workout)
+    workoutTitle = scoringStyle.description
+    currentDivision = Division.objects.get(pk=division)
+    currentDivisionDescription = currentDivision.description
     workoutDescription = scoringStyle.description_extended
     context = {'scores': listOfScores, 'workouts': listOfWorkouts, 'divisions': listOfDivisions,
-               'scoringStyle': scoringStyle.scoringStyle, 'currentDivision': int(division), 'currentWorkout': int(workout), 'workoutDescription': workoutDescription}
+               'scoringStyle': scoringStyle.scoringStyle, 'currentDivision': int(division), 
+               'currentWorkout': int(workout), 'workoutDescription': workoutDescription, 
+               'workoutTitle' : workoutTitle, 'currentDivisionDescription': currentDivisionDescription}
     return HttpResponse(template.render(context, request))
 
 

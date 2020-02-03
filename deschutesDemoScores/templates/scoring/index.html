@@ -16,7 +16,9 @@
 
 <div class="jumbotron">
   <div align="center">
+  <a href="/">
   <img src="{% static "scoring/cc-header.jpeg" %}" width="1600" height="200"/>
+  </a>
   </div>
 </div>
 <div class="container">
@@ -56,31 +58,58 @@
     </div>
     <div class=col>
       {{workoutDescription|safe}}
+      <hr>
+      <b>{{workoutTitle}}
+      <hr>
+      {{currentDivisionDescription}}</b>
     </div>
   </div>
 </div>
 
 <table class="table table-striped">
 <th>Rank</th>
-{% if scoringStyle != 'W' %} <th>reps</th> {% endif %}
-{% if scoringStyle == 'T' %} <th>minutes</th> {% endif %}
-{% if scoringStyle == 'T' %} <th>seconds</th> {% endif %}
-{% if scoringStyle == 'W' %} <th>weight</th> {% endif %}
 
-<th>workout</th>
-<th>division</th>
-<th>team</th>
+
+{% if scoringStyle == 'W' %}
+<th>Weight</th> 
+{% endif %}
+
+{% if scoringStyle == 'R' %}
+<th>Reps</th> 
+{% endif %}
+
+{% if scoringStyle == 'T' %} 
+<th>Minutes</th> 
+<th>Seconds</th>
+<th>Tie Break</th> 
+{% endif %}
+
+
+
+<th>Team</th>
 
 {% for score in scores %}
 <tr>
 <td>
 {{score.rank}}</td><td>
-{% if scoringStyle != 'W' %} {{score.score.reps}}</td><td> {% endif %}
-{% if scoringStyle == 'T' %}  {{score.score.minutes}}</td><td> {% endif %}
-{% if scoringStyle == 'T' %} {{score.score.seconds}}</td><td> {% endif %}
-{% if scoringStyle == 'W' %} {{score.score.weight}}</td><td> {% endif %}
-{{score.score.workout.description}}</td><td>
-{{score.score.team.division}}</td><td>
+
+{% if scoringStyle == 'W' %} 
+
+{{score.score.weight}}</td><td> 
+
+{% endif %}
+
+{% if scoringStyle == 'T' %}
+{{score.score.minutes}}</td><td> 
+{{score.score.seconds}}</td><td> 
+{{score.score.reps}}</td><td> 
+
+{% endif %}
+
+{% if scoringStyle == 'R' %} 
+{{score.score.reps}}</td><td> 
+{% endif %}
+
 {{score.score.team.description}}</td>
 </tr>
 {% endfor %}
