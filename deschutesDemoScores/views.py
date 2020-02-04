@@ -125,5 +125,6 @@ def scoreInputReceived(request):
                 'unable to save score for team ' + listOfTeams[i])
 
     template = loader.get_template('scoring/scoreInputReceived.html')
-    context = {'listOfSaveResults': listOfSaveResults}
+    context = {'listOfSaveResults': listOfSaveResults, 'currentDivision': int(division), 
+               'currentWorkout': int(workout)}
     return HttpResponse(template.render(context, request))

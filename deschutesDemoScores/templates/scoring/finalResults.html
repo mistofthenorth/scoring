@@ -23,16 +23,7 @@
 </div>
 
 
-<div align='center'>
-<form action="" method="get">
-              <select id = "division" name="division">
-                     {% for division in divisions %}
-               <option value = {{division.id}}>{{division.description}}</option>
-                     {% endfor %}
-              </select>
-    <input type="submit" value="Choose Division">
-</form>
-</div>
+
 <h1>
 <p align='center'>
   {{currentDivision}}
@@ -57,10 +48,19 @@
   {% endfor %}
 
 {{score.score}}</td><td>
-{{score.rank}}</td>
+<span class="finalRank" > {{score.rank}} </span></td>
 
 </tr>
 {% endfor %}
 </table>
-
+<div align='center'>
+<form action="" method="get">
+              <select id = "division" name="division">
+                     {% for division in divisions %}
+               <option value = {{division.id}}>{{division.description}}</option>
+                     {% endfor %}
+              </select>
+    <input type="submit" value="Choose Division">
+</form>
+</div>
 </html>

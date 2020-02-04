@@ -5,3 +5,10 @@ table tr td span {
 }
 
 .jumbotron { padding: 0; background-color: #000;}
+
+.finalRank {
+
+	color: red;
+	font-weight: bold;
+
+}
