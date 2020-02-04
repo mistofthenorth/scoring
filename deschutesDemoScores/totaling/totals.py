@@ -57,7 +57,7 @@ def getSingleWorkoutTotal(workout, division):
 
 def getAllWorkoutsTotal(division):
 
-    setOfWorkouts = Workout.objects.filter(event=2)
+    setOfWorkouts = Workout.objects.filter(event=2).order_by('order')
 
     listOfWorkoutScores = []
     for workout in setOfWorkouts:

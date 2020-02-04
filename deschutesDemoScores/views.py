@@ -19,7 +19,7 @@ def index(request):
     # DDDataImport.importDDData()
     print(workout)
     print(division)
-    listOfWorkouts = Workout.objects.filter(event=2)
+    listOfWorkouts = Workout.objects.filter(event=2).order_by('order')
     listOfDivisions = Division.objects.filter(event=2)
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
     scoringStyle = Workout.objects.get(pk=workout)
@@ -43,7 +43,7 @@ def finalResults(request):
     currentDivision = Division.objects.get(pk=division)
     currentDivisionDescription = currentDivision.description
     listOfDivisions = Division.objects.filter(event=2)
-    listOfWorkouts = Workout.objects.filter(event=2)
+    listOfWorkouts = Workout.objects.filter(event=2).order_by('order')
     allWorkouts = totals.getAllWorkoutsTotal(division)
     template = loader.get_template('scoring/finalResults.html')
     context = {'divisions': listOfDivisions, 'allWorkouts': allWorkouts,

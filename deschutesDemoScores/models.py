@@ -21,7 +21,8 @@ class Workout(models.Model):
         default='T')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     includeInFinalResults = models.BooleanField(default=True)
-
+    order = models.IntegerField(default=1)
+    
     def __str__(self):
         return self.description
 
