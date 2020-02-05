@@ -43,7 +43,7 @@
 {{score.team}}</td><td>
 
   {% for event in score.eventScores %}
-  {{event.rank}} <span>({% if event.score.workout.scoringStyle == 'R' %}{{event.score.reps}}{% endif %}{% if event.score.workout.scoringStyle == 'T' %}{{event.score.minutes}}:{% endif %}{% if event.score.workout.scoringStyle == 'T' %}{{event.score.seconds}}{% endif %}{% if event.score.workout.scoringStyle == 'W' %}{{event.score.weight}}{% endif %})</span>
+  {{event.rank}} <span>({% if event.score.workout.scoringStyle == 'R' %}{{event.score.reps}}{% endif %}{% if event.score.workout.scoringStyle == 'T' %}{{event.score.minutes}}:{% endif %}{% if event.score.workout.scoringStyle == 'T' %}{{event.score.seconds}} - {{event.score.reps}}{% endif %}{% if event.score.workout.scoringStyle == 'W' %}{{event.score.weight}}{% endif %})</span>
   </td><td>
   {% endfor %}
 
