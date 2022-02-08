@@ -12,7 +12,7 @@ def index(request):
         workout = request.GET['workout']
         division = request.GET['division']
     except:
-        workout = 1
+        workout = 11
         division = 1
     template = loader.get_template('scoring/index.html')
     # DDDataImport.importDDTeams()
@@ -57,7 +57,7 @@ def scoreInput(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 1
+        workout = 11
         division = 1
 
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
@@ -77,7 +77,7 @@ def scoreInputReceived(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 1
+        workout = 11
         division = 1
     # Split into lists
     print(workout)

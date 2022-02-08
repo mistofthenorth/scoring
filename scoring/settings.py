@@ -75,23 +75,23 @@ WSGI_APPLICATION = 'scoring.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': ('scores_db'),
-        'USER': ('postgres'),
-        'PASSWORD': ('scoring_admin'),
-        'HOST': 'scoring.c5qejtxfntrt.us-west-2.rds.amazonaws.com',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': ('scores_db'),
+#        'USER': ('postgres'),
+#        'PASSWORD': ('scoring_admin'),
+#        'HOST': 'scoring.c5qejtxfntrt.us-west-2.rds.amazonaws.com',
+#        'PORT': '',
+#    }
+#}
 
 #if 'RDS_HOSTNAME' in os.environ:
 #    DATABASES = {
