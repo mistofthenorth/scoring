@@ -1,4 +1,4 @@
-Django==2.2.27
+Django==3.2.6
 pytz==2018.9
 sqlparse==0.3.0
 aws-psycopg2

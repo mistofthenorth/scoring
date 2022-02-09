@@ -12,15 +12,15 @@ def index(request):
         workout = request.GET['workout']
         division = request.GET['division']
     except:
-        workout = 11
+        workout = 1
         division = 1
     template = loader.get_template('scoring/index.html')
     # DDDataImport.importDDTeams()
     # DDDataImport.importDDData()
     print(workout)
     print(division)
-    listOfWorkouts = Workout.objects.filter(event=2).order_by('order')
-    listOfDivisions = Division.objects.filter(event=2)
+    listOfWorkouts = Workout.objects.filter(event=1).order_by('order')
+    listOfDivisions = Division.objects.filter(event=1)
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
     scoringStyle = Workout.objects.get(pk=workout)
     workoutTitle = scoringStyle.description
@@ -42,8 +42,8 @@ def finalResults(request):
 
     currentDivision = Division.objects.get(pk=division)
     currentDivisionDescription = currentDivision.description
-    listOfDivisions = Division.objects.filter(event=2)
-    listOfWorkouts = Workout.objects.filter(event=2).order_by('order')
+    listOfDivisions = Division.objects.filter(event=1)
+    listOfWorkouts = Workout.objects.filter(event=1).order_by('order')
     allWorkouts = totals.getAllWorkoutsTotal(division)
     template = loader.get_template('scoring/finalResults.html')
     context = {'divisions': listOfDivisions, 'allWorkouts': allWorkouts,
@@ -57,7 +57,7 @@ def scoreInput(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 11
+        workout = 1
         division = 1
 
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
@@ -77,7 +77,7 @@ def scoreInputReceived(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 11
+        workout = 1
         division = 1
     # Split into lists
     print(workout)
@@ -91,7 +91,7 @@ def scoreInputReceived(request):
 
     for (i, teamScore) in enumerate(listOfTeams):
         score = Score.objects.get(
-            team=listOfTeams[i], workout=workout, event=2)
+            team=listOfTeams[i], workout=workout, event=1)
         try:
             score.weight = int(listOfWeight[i])
         except ValueError:
