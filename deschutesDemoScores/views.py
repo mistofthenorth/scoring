@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Team, Score, Workout, Division, Event
 from .totaling import totals
 from .importing import DDDataImport
-
+import json
 
 def index(request):
     try:
         workout = request.GET['workout']
         division = request.GET['division']
     except:
-        workout = 1
+        workout = 6
         division = 1
     template = loader.get_template('scoring/index.html')
     # DDDataImport.importDDTeams()
@@ -27,12 +27,18 @@ def index(request):
     currentDivision = Division.objects.get(pk=division)
     currentDivisionDescription = currentDivision.description
     workoutDescription = scoringStyle.description_extended
-    context = {'scores': listOfScores, 'workouts': listOfWorkouts, 'divisions': listOfDivisions,
-               'scoringStyle': scoringStyle.scoringStyle, 'currentDivision': int(division), 
-               'currentWorkout': int(workout), 'workoutDescription': workoutDescription, 
-               'workoutTitle' : workoutTitle, 'currentDivisionDescription': currentDivisionDescription}
-    return HttpResponse(template.render(context, request))
-
+    # context = {'scores': listOfScores, 'workouts': listOfWorkouts, 'divisions': listOfDivisions,
+    #           'scoringStyle': scoringStyle.scoringStyle, 'currentDivision': int(division), 
+    #           'currentWorkout': int(workout), 'workoutDescription': workoutDescription, 
+    #           'workoutTitle' : workoutTitle, 'currentDivisionDescription': currentDivisionDescription}
+    # return HttpResponse(template.render(context, request))
+    s = json.dumps(listOfScores, default=lambda x: x.__dict__)
+    # w = json.dumps(listOfWorkouts, default=lambda x: x.__dict__)
+    context = {'scores': s, 'workouts': list(listOfWorkouts.values()), 'divisions': list(listOfDivisions.values()),
+                'scoringStyle': scoringStyle.scoringStyle, 'currentDivision': int(division), 
+                'currentWorkout': int(workout), 'workoutDescription': workoutDescription, 
+                'workoutTitle' : workoutTitle, 'currentDivisionDescription': currentDivisionDescription}
+    return JsonResponse(context)
 
 def finalResults(request):
     try:
@@ -57,7 +63,7 @@ def scoreInput(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 1
+        workout = 6
         division = 1
 
     listOfScores = totals.getSingleWorkoutTotal(workout, division)
@@ -68,8 +74,8 @@ def scoreInput(request):
     currentWorkoutDescription = currentWorkout.description
     template = loader.get_template('scoring/scoreInput.html')
     context = {'scores': sortedListOfScores,'currentDivisionDescription': currentDivisionDescription, 'currentWorkoutDescription': currentWorkoutDescription, 'currentWorkout': int(workout), 'currentDivision' : int(division)}
-    return HttpResponse(template.render(context, request))
-
+    #return HttpResponse(template.render(context, request))
+    return Json
 
 def scoreInputReceived(request):
     print(request.POST)
@@ -77,7 +83,7 @@ def scoreInputReceived(request):
         workout = request.POST['workout']
         division = request.POST['division']
     except:
-        workout = 1
+        workout = 6
         division = 1
     # Split into lists
     print(workout)
