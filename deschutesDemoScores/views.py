@@ -54,7 +54,11 @@ def finalResults(request):
     template = loader.get_template('scoring/finalResults.html')
     context = {'divisions': listOfDivisions, 'allWorkouts': allWorkouts,
                'workouts': listOfWorkouts, 'currentDivision': currentDivisionDescription}
-    return HttpResponse(template.render(context, request))
+    #return HttpResponse(template.render(context, request))
+    s = json.dumps(allWorkouts, default=lambda x: x.__dict__)
+    json_response = {'divisions': list(listOfDivisions.values()), 'allWorkouts': s,
+                    'workouts': list(listOfWorkouts.values()), 'currentDivision': currentDivisionDescription}
+    return JsonResponse(json_response)
 
 
 @login_required
@@ -74,8 +78,7 @@ def scoreInput(request):
     currentWorkoutDescription = currentWorkout.description
     template = loader.get_template('scoring/scoreInput.html')
     context = {'scores': sortedListOfScores,'currentDivisionDescription': currentDivisionDescription, 'currentWorkoutDescription': currentWorkoutDescription, 'currentWorkout': int(workout), 'currentDivision' : int(division)}
-    #return HttpResponse(template.render(context, request))
-    return Json
+    return HttpResponse(template.render(context, request))
 
 def scoreInputReceived(request):
     print(request.POST)
