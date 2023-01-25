@@ -7,5 +7,4 @@ urlpatterns = [
     path('finalResults', views.finalResults, name='finalResults'),
     path('scoreInput', views.scoreInput, name='scoreInput'),
     path('scoreInputReceived', views.scoreInputReceived, name='scoreInputReceived'),
-    path('teams', views.teams, name='teams'),
-    path('scores', views.scores, name='scores')]
+    path('teams', views.teams, name='teams')]

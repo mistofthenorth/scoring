@@ -62,11 +62,9 @@ def finalResults(request):
 
 def teams(request):
     teams = Team.objects.all()
-    return JsonResponse({'teams' : list(teams.values())})
-
-def scores(request):
     scores = Score.objects.all()
-    return JsonResponse({'scores' : list(scores.values())})
+    return JsonResponse({'teams' : list(teams.values()), 'scores' : list(scores.values())})
+
 
 @login_required
 def scoreInput(request):
