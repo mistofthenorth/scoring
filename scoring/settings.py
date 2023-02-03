@@ -86,9 +86,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': ('ebdb'),
-        'USER': ('scoring'),
-        'PASSWORD': ('scoring_admin'),
-        'HOST': 'aamfsl72fiofu5.c5qejtxfntrt.us-west-2.rds.amazonaws.com',
+        'USER': ('briano'),
+        'PASSWORD': ('briano1000'),
+        'HOST': 'awseb-e-rzstkqfbbj-stack-awsebrdsdatabase-xncrll8kc3nl.c5qejtxfntrt.us-west-2.rds.amazonaws.com',
         'PORT': '',
     }
 }
