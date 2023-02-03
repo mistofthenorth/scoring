@@ -82,16 +82,6 @@ WSGI_APPLICATION = 'scoring.wsgi.application'
 #    }
 #}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': ('ebdb'),
-        'USER': ('briano'),
-        'PASSWORD': ('briano1000'),
-        'HOST': 'awseb-e-rzstkqfbbj-stack-awsebrdsdatabase-xncrll8kc3nl.c5qejtxfntrt.us-west-2.rds.amazonaws.com',
-        'PORT': '',
-    }
-}
 
 if 'RDS_HOSTNAME' in os.environ:
     DATABASES = {
