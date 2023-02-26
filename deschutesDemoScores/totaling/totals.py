@@ -10,7 +10,7 @@ def getSingleWorkoutTotal(workout, division):
 
     if workoutProperties.scoringStyle == 'T':
         setOfScores = sorted(setOfScores, key=lambda x: (
-            (x.minutes or float('inf')), (x.seconds or float('inf')), -int(x.reps or 0)))
+            (x.minutes if x.minutes != None else float('inf')), (x.seconds if x.minutes != None else float('inf')), -int(x.reps or 0)))
     elif workoutProperties.scoringStyle == 'R':
         setOfScores = sorted(setOfScores, key=lambda x: (-int(x.reps or 0)))
     elif workoutProperties.scoringStyle == 'W':
