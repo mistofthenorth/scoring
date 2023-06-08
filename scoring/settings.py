@@ -25,7 +25,7 @@ SECRET_KEY = 'x78bsbag@3qy1^^ci6f!__dwoo$@(l!*11=h*ch2$is8ms7+2k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.16','127.0.0.1','brians-macbook-pro.local','raspberrypi','django-scoring.nysp5ab6tw.us-west-2.elasticbeanstalk.com','cupid-prod.eba-bujeutks.us-west-2.elasticbeanstalk.com', 'deschutes-demo-2022.eba-bujeutks.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['192.168.0.16','127.0.0.1','brians-macbook-pro.local','raspberrypi','django-scoring.nysp5ab6tw.us-west-2.elasticbeanstalk.com','cupid-prod.eba-bujeutks.us-west-2.elasticbeanstalk.com', 'deschutes-demo-2022.eba-bujeutks.us-west-2.elasticbeanstalk.com', 'cupidscrush-dev.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
